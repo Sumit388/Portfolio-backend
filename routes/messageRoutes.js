@@ -5,24 +5,40 @@ import { Message } from "../models/message.js";
 const router = express.Router();
 const jsonParser = bodyParser.json();
 
+//Post request
 router.post("/", jsonParser, async (req, res) => {
   const { name, email, message } = req.body;
-  await Message.create({
-    name,
-    email,
-    message,
-  });
-  res.json({
-    success: true,
-    message: "data added successfully.",
-  });
+  try {
+    await Message.create({
+      name,
+      email,
+      message,
+    });
+    res.json({
+      success: true,
+      message: "data added successfully.",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
 });
+
+//Get request
 router.get("/", jsonParser, async (req, res) => {
-  const messages = await Message.find({});
-  res.json({
-    success: true,
-    messages,
-  });
+  try {
+    const messages = await Message.find({});
+    if (!blog) {
+      return res.status(404).send("Blog not found");
+    }
+    res.json({
+      success: true,
+      messages,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 export default router;

@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 const blog = express.Router();
 const jsonParser = bodyParser.json();
 
+//Get request
 blog.get("/:id",jsonParser, async (req, res) => {
   const id = req.params.id;
   try {
@@ -19,6 +20,7 @@ blog.get("/:id",jsonParser, async (req, res) => {
   }
 });
 
+//Patch request
 blog.patch("/:id",jsonParser, async (req, res) => {
     const id = req.params.id;
     const blogData = req.body;
