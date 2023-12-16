@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import messageRoute from "./routes/messageRoutes.js";
 import blogRoute from "./routes/blogRoutes.js";
 import singleBlogRoutes from "./routes/singleBlogRoutes.js";
+import user from "./routes/user.js";
 import cors from "cors";
 
 mongoose
@@ -27,5 +28,6 @@ app.use(cors());
 app.use("/api/v1/message",messageRoute);
 app.use("/api/v1/blog",blogRoute);
 app.use("/api/v1/blog",singleBlogRoutes);
+app.use("/api/v1/user",user);
 
 
